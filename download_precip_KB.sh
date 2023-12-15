@@ -4,6 +4,8 @@
 #fname1="https://www.ncei.noaa.gov/data/nclimgrid-daily/access/grids/$year/"
 #fname2="ncdd-$year$month-grd-scaled.nc"
 
+data="/share/bingham/bootk/"
+
 for year in {1951..2021}
 do
 	fname1="https://www.ncei.noaa.gov/data/nclimgrid-daily/access/grids/$year/"
@@ -13,8 +15,12 @@ do
         do
                 fname2="ncdd-$year$month-grd-scaled.nc"
 		fname=$fname1$fname2
-		wget $fname 
-                echo $fname
+		
+		# Using -P flag to specify the download directory
+        	wget -P "$data" "$fname" 
+                
+		# shell equivalent to print()
+		echo $fname
         done
 done
 
