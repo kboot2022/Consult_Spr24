@@ -1,1 +1,0 @@
-README for Precipitation Data
