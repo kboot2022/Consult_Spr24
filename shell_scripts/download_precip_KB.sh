@@ -4,9 +4,9 @@
 #fname1="https://www.ncei.noaa.gov/data/nclimgrid-daily/access/grids/$year/"
 #fname2="ncdd-$year$month-grd-scaled.nc"
 
-data="/share/bingham/bootk/"
+data="/Users/kboothomefolder/consult_Spr24/"
 
-for year in {1951..2021}
+for year in {1961..2021}
 do
 	fname1="https://www.ncei.noaa.gov/data/nclimgrid-daily/access/grids/$year/"
 	#fname2="ncdd-$year$month-grd-scaled.nc"
