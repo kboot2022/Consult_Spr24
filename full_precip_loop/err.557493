@@ -1,0 +1,6 @@
+{Error using precip_animation
+The specified profile is not valid.
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));
+} 

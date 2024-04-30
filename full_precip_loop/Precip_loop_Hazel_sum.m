@@ -14,7 +14,9 @@ mask=mask';
 
 prcp_ann=[];
 
-year_range=[1951] % set number of years here, includes last
+% Previously run for 1951:1:1971 and 1972:1:1999 and 2000:1:2021
+
+year_range=[1972:1:1999]; % set number of years here, testing memory 
 
 first_yr = num2str(year_range(1));
 last_yr = num2str(year_range(end));
@@ -31,7 +33,7 @@ for i=1:length(year_range);
         oyom=[oy om];
 
         % Update file path
-        ncf=['/Users/kboothomefolder/OneDrive_UNCW/x_consult/precip/data/ncdd-', oyom, '-grd-scaled.nc'];
+        ncf=['../data/ncdd-', oyom, '-grd-scaled.nc'];
         ncf %test file name by printing
 
         % read precipitation variable
@@ -40,7 +42,7 @@ for i=1:length(year_range);
         % concatenate to end of prcp_ann
         prcp_ann=cat(3,prcp_ann,prcp);
         %prcp_ann=cat(# of dimensions, prcp_ann, prcp data)
-
+        
     end
 
 end
@@ -54,7 +56,7 @@ latnc=ncread(ncf,'lat');
 Lonnc=Lonnc';
 Latnc=Latnc';
 
-% Running Cumulative Precip - 14 day
+%% Running Cumulative Precip - 14 day
 % 14-day accumulation at each observation point
 
 % need to add sum of leftover days to account for days 
@@ -69,12 +71,14 @@ Latnc=Latnc';
     %%biwk=1:floor(size(prcp_ann,3))/14); prcp_14day=sum(prcp_ann(:,:,(biwk-1)*14+1:biwk*14),3); Divides into
     %into bi-weekly chunks
 
+% Note:: This code calculates the SUM just in cased
+
 for biwk=14:size(prcp_ann,3) 
 
 % Calculate running 14-day precipitation sum
     %prcp_14day=sum(prcp_ann(:,:,biwk-13:biwk),3);
-    
-    prcp_14day=mean(prcp_ann(:,:,biwk-13:biwk),3,'omitnan');
+    prcp_14day=sum(prcp_ann(:,:,biwk-13:biwk),3,'omitnan');
+
     %prcp_14day(isnan(prcp_14day))=0; % set nan values = 0
 
 % Sum 14-day precip within bounds of 1 degree grid squares
@@ -84,12 +88,13 @@ for biwk=14:size(prcp_ann,3)
             poly(:,1)=[Lonmask(i,j), Lonmask(i,j+1),Lonmask(i+1,j+1),Lonmask(i+1,j),Lonmask(i,j)];
             poly(:,2)=[Latmask(i,j), Latmask(i,j+1),Latmask(i+1,j+1),Latmask(i+1,j),Latmask(i,j)];
             fl=inpolygon(Lonnc,Latnc,poly(:,1),poly(:,2));
-            prcp_poly_14day(i,j,biwk)= mean(prcp_14day(find(fl==1)),'omitnan');
+            %prcp_poly_14day(i,j,biwk)= mean(prcp_14day(find(fl==1)),'omitnan');
+	    prcp_poly_14day(i,j,biwk)= sum(prcp_14day(find(fl==1)));
         end
     end
 end
 
-%file_path = sprintf('/Users/kboothomefolder/Library/CloudStorage/OneDrive-UNC-Wilmington/x_consult/precip/prcp_poly_14day_%s_%s.mat', first_yr, last_yr);
+%save('prcp_poly_14day.mat', 'prcp_poly_14day'); % original save
 
-file_path = sprintf('./prcp_poly_14day_%s_%s.mat', first_yr, last_yr);
+file_path = sprintf('./prcp_poly_14daysum_%s_%s.mat', first_yr, last_yr);
 save(file_path, 'prcp_poly_14day');

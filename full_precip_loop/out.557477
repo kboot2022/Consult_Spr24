@@ -1,0 +1,64 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2023 The MathWorks, Inc.
+                  R2023a (9.14.0.2206163) 64-bit (glnxa64)
+                             February 22, 2023
+
+Warning: X does not support locale en_US.UTF-8
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@c015n01>
+Subject: Job 557477: <animation> in cluster <Hazel> Done
+
+Job <animation> was submitted from host <login02> by user <bootk> in cluster <Hazel> at Wed Apr 10 12:57:14 2024
+Job was executed on host(s) <c015n01>, in queue <serial>, as user <bootk> in cluster <Hazel> at Wed Apr 10 12:57:16 2024
+</home/bootk> was used as the home directory.
+</share/bingham/bootk/precip/full_precip_loop> was used as the working directory.
+Started at Wed Apr 10 12:57:16 2024
+Terminated at Wed Apr 10 12:57:52 2024
+Results reported at Wed Apr 10 12:57:52 2024
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+
+#BSUB -n 1 		## request nodes
+#BSUB -W 360 		## work time minutes
+#BSUB -J animation 	## run name
+#BSUB -o out.%J 	## output
+#BSUB -e err.%J 	## error
+##BSUB -x ##Use exclusive only if necessary, uncomment if job spawns additional threads
+module load matlab 
+matlab -nodisplay -nosplash -nodesktop -singleCompThread -r "run('precip_animation.m');exit;"
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   14.97 sec.
+    Max Memory :                                 1 GB
+    Average Memory :                             0.75 GB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                36
+    Run time :                                   44 sec.
+    Turnaround time :                            38 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <err.557477> for stderr output of this job.
+
