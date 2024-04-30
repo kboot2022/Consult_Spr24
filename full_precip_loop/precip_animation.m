@@ -11,18 +11,10 @@ lat = lat-0.5;
 lat=lat(1:end-1);
 [Lon,Lat]=meshgrid(lon,lat);
 
-file1 = 'prcp_poly_14day_1951_1971.mat';
-data1 = load(file1);
+filex = 'prcp_14day_mean_1951_2021.mat';
+datax = load(filex);
 
-file2 = 'prcp_poly_14day_1972_1999.mat';
-data2 = load(file2);
-
-file3 = 'prcp_poly_14day_2000_2021.mat';
-data3 = load(file3);
-
-merged_data = cat(3, data1.prcp_poly_14day, data2.prcp_poly_14day,data3.prcp_poly_14day);
-
-prcp1 = merged_data/1000; % convert to meters
+prcp1 = datax.prcp_poly_14day/1000; % convert to meters
 nt = size(prcp1,3);
 whos
 

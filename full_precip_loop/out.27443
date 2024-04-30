@@ -1,0 +1,65 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2023 The MathWorks, Inc.
+                  R2023a (9.14.0.2206163) 64-bit (glnxa64)
+                             February 22, 2023
+
+Warning: X does not support locale en_US.UTF-8
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@c019n02>
+Subject: Job 27443: <full_loop> in cluster <Hazel> Done
+
+Job <full_loop> was submitted from host <login02> by user <bootk> in cluster <Hazel> at Tue Apr 30 10:47:01 2024
+Job was executed on host(s) <c019n02>, in queue <serial>, as user <bootk> in cluster <Hazel> at Tue Apr 30 10:47:27 2024
+</home/bootk> was used as the home directory.
+</share/bingham/bootk/precip/full_precip_loop> was used as the working directory.
+Started at Tue Apr 30 10:47:27 2024
+Terminated at Tue Apr 30 10:49:08 2024
+Results reported at Tue Apr 30 10:49:08 2024
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+
+#BSUB -n 1 		## request nodes
+#BSUB -W 1440 		## work time minutes
+##BSUB -R "rusage[mem=192GB]" ## set memory for job
+#BSUB -J full_loop 	## run name
+#BSUB -o out.%J 	## output
+#BSUB -e err.%J 	## error
+##BSUB -x ##Use exclusive only if necessary, uncomment if job spawns additional threads
+module load matlab 
+matlab -nodisplay -nosplash -nodesktop -singleCompThread -r "run('merge_prcp_mats.m');exit;"
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   16.17 sec.
+    Max Memory :                                 1 GB
+    Average Memory :                             0.83 GB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                48
+    Run time :                                   101 sec.
+    Turnaround time :                            127 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <err.27443> for stderr output of this job.
+

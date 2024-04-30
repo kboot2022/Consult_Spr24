@@ -8,4 +8,4 @@
 #BSUB -e err.%J 	## error
 ##BSUB -x ##Use exclusive only if necessary, uncomment if job spawns additional threads
 module load matlab 
-matlab -nodisplay -nosplash -nodesktop -singleCompThread -r "run('Precip_loop_full_Hazel.m');exit;"
+matlab -nodisplay -nosplash -nodesktop -singleCompThread -r "run('Precip_loop_Hazel_mean.m');exit;"

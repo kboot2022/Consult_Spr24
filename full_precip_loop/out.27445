@@ -1,0 +1,54 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@c013n03>
+Subject: Job 27445: <full_loop> in cluster <Hazel> Exited
+
+Job <full_loop> was submitted from host <login02> by user <bootk> in cluster <Hazel> at Tue Apr 30 10:55:09 2024
+Job was executed on host(s) <c013n03>, in queue <serial>, as user <bootk> in cluster <Hazel> at Tue Apr 30 10:55:12 2024
+</home/bootk> was used as the home directory.
+</share/bingham/bootk/precip/full_precip_loop> was used as the working directory.
+Started at Tue Apr 30 10:55:12 2024
+Terminated at Tue Apr 30 10:55:12 2024
+Results reported at Tue Apr 30 10:55:12 2024
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+
+#BSUB -n 1 		## request nodes
+#BSUB -W 1440 		## work time minutes
+##BSUB -R "rusage[mem=192GB]" ## set memory for job
+#BSUB -J full_loop 	## run name
+#BSUB -o out.%J 	## output
+#BSUB -e err.%J 	## error
+##BSUB -x ##Use exclusive only if necessary, uncomment if job spawns additional threads
+module load matlab 
+matlab -nodisplay -nosplash -nodesktop -singleCompThread -r "run('precip_animation.m');exit;"
+
+------------------------------------------------------------
+
+Exited with exit code 127.
+
+Resource usage summary:
+
+    CPU time :                                   0.04 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   8 sec.
+    Turnaround time :                            3 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <err.27445> for stderr output of this job.
+
